@@ -20,32 +20,13 @@ Coupled
         {
         Atomic
             {
-            Name = Constant0
-            Ports = 0 ; 1
-            Path = sources\constant_sci.h
-            Description = Constant
-            Graphic
-                {
-                Position = -6855 ; -780
-                Dimension = 675 ; 675
-                Direction = Right
-                Color = 15
-                Icon = %sources%constant.svg
-                }
-            Parameters
-                {
-                K = Str; 1.0 ; Constant output value (Scilab expression)
-                }
-            }
-        Atomic
-            {
             Name = WSum0
             Ports = 1 ; 1
             Path = qss/qss_wsum.h
             Description = y = K[0] * u0 + K[1] * u1 + ... + K[7] * u7 (QSS1 to 4)
             Graphic
                 {
-                Position = -4005 ; -585
+                Position = -3480 ; -660
                 Dimension = 675 ; 720
                 Direction = Right
                 Color = 15
@@ -53,7 +34,7 @@ Coupled
                 }
             Parameters
                 {
-                K[0] = Str; 2 ; 
+                K[0] = Str; 1 ; 
                 K[1] = Str; 1 ; 
                 K[2] = Str; 0 ; 
                 K[3] = Str; 0 ; 
@@ -66,33 +47,13 @@ Coupled
             }
         Atomic
             {
-            Name = Unit Delay0
-            Ports = 1 ; 1
-            Path = discrete\qoperator_sci.h
-            Description = Discrete delay
-            Graphic
-                {
-                Position = -1905 ; 870
-                Dimension = 675 ; 675
-                Direction = Right
-                Color = 15
-                Icon = %discrete%qoperator.svg
-                }
-            Parameters
-                {
-                x0 = Str; 1 ; Initial state (Scilab expression)
-                Ts = Str; 1 ; Sampling Period (Scilab expression)
-                }
-            }
-        Atomic
-            {
             Name = To Disk1
             Ports = 1 ; 0
             Path = sinks/to_disk.h
             Description = Save the values (event,t) in a file.
             Graphic
                 {
-                Position = 2370 ; 1620
+                Position = 2370 ; 1995
                 Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
@@ -111,7 +72,7 @@ Coupled
             Description = Plot input signal using GnuPlot
             Graphic
                 {
-                Position = -480 ; 3165
+                Position = -405 ; 3090
                 Dimension = 675 ; 720
                 Direction = Right
                 Color = 15
@@ -130,135 +91,109 @@ Coupled
             }
         Atomic
             {
-            Name = Atomic0
+            Name = Constant0
+            Ports = 0 ; 1
+            Path = sources\constant_sci.h
+            Description = Constant
+            Graphic
+                {
+                Position = -5730 ; -1380
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sources%constant.svg
+                }
+            Parameters
+                {
+                K = Str; 1 ; Constant output value (Scilab expression)
+                }
+            }
+        Atomic
+            {
+            Name = Atomic1
             Ports = 1 ; 1
             Path = tpfinal/fromfile.h
             Description = Atomic DEVS model
             Graphic
                 {
-                Position = -4530 ; 4140
-                Dimension = 675 ; 720
+                Position = -2130 ; -630
+                Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
                 Icon = None
                 }
             Parameters
                 {
-                FName = Str; /home/fran/Desktop/output.txt ; 
+                input = Str;  ; 
                 }
             }
         Atomic
             {
-            Name = GnuPlot1
-            Ports = 1 ; 0
-            Path = sinks/gnuplot.h
-            Description = Plot input signal using GnuPlot
+            Name = Unit Delay0
+            Ports = 1 ; 1
+            Path = discrete\qoperator_sci.h
+            Description = Discrete delay
             Graphic
                 {
-                Position = -3255 ; 4140
-                Dimension = 675 ; 720
+                Position = 345 ; -630
+                Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
-                Icon = %sinks%gnuplot.svg
+                Icon = %discrete%qoperator.svg
                 }
             Parameters
                 {
-                Inputs = Str; %Inputs ; Number of inputs
-                Format = Str; set xrange [0:%tf] @ set grid @ set title 'from file' ; General Formatting (use @ as line break)
-                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
-                Format2 = Str;  ; Formatting options for input 2
-                Format3 = Str;  ; Formatting options for input 3
-                Format4 = Str;  ; Formatting options for input 4
-                Format5 = Str;  ; Formatting options for input 5
+                x0 = Str; 0 ; Initial state (Scilab expression)
+                Ts = Str; 1 ; Sampling Period (Scilab expression)
                 }
             }
         Point
             {
-            ConectedLines = 2 ; 4 ; 5
+            ConectedLines = 4 ; 5 ; 6
             ConectedExtrems = Org ; Org ; Org
-            Position = -600 ; 1950
+            Position = 1725 ; 2325
             }
-        Point
+        Line
             {
-            ConectedLines = 5 ; 6 ; 7
-            ConectedExtrems = Org ; Org ; Org
-            Position = -2850 ; 2925
-            }
-        Point
-            {
-            ConectedLines = 7 ; 8 ; 9
-            ConectedExtrems = Org ; Org ; Org
-            Position = -4950 ; 2925
+            Source = Cmp ;  4 ;  1 ; 0
+            Sink = Cmp ;  1 ;  1 ; -1
+            PointX = -4950 ; -4275 ; -4275 ; -3615
+            PointY = -1050 ; -1050 ; -300 ; -300
             }
         Line
             {
             Source = Cmp ;  1 ;  1 ; 0
-            Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -6075 ; -4140 ; -4140
-            PointY = -450 ; -450 ; -225
+            Sink = Cmp ;  5 ;  1 ; -1
+            PointX = -2700 ; -2700 ; -2265
+            PointY = -300 ; -300 ; -300
             }
         Line
             {
-            Source = Cmp ;  3 ;  1 ; 0
+            Source = Cmp ;  5 ;  1 ; 0
+            Sink = Cmp ;  6 ;  1 ; -1
+            PointX = -1350 ; 210 ; 210
+            PointY = -300 ; -300 ; -300
+            }
+        Line
+            {
+            Source = Cmp ;  6 ;  1 ; 0
             Sink = Pnt ;  1 ; -1 ; 0
-            PointX = -1125 ; -600 ; -600
-            PointY = 1200 ; 1200 ; 1950
+            PointX = 1125 ; 1725 ; 1725
+            PointY = -300 ; -300 ; 2325
             }
         Line
             {
-            Source = Cmp ;  2 ;  1 ; 0
-            Sink = Cmp ;  3 ;  1 ; -1
-            PointX = -3225 ; -3225 ; -2040 ; -2040
-            PointY = -225 ; -225 ; -225 ; 1200
-            }
-        Line
-            {
-            Source = Cmp ;  4 ;  1 ; -1
+            Source = Cmp ;  2 ;  1 ; -1
             Sink = Pnt ;  1 ; -1 ; 0
-            PointX = 2235 ; 2235 ; -600
-            PointY = 1950 ; 1950 ; 1950
+            PointX = 2235 ; 1725 ; 1725
+            PointY = 2325 ; 2325 ; 2325
             }
         Line
             {
             Source = Pnt ;  1 ; -1 ; 0
-            Sink = Pnt ;  2 ; -1 ; 0
-            PointX = -600 ; -600 ; -2850
-            PointY = 1950 ; 2925 ; 2925
-            }
-        Line
-            {
-            Source = Cmp ;  5 ;  1 ; -1
-            Sink = Pnt ;  2 ; -1 ; 0
-            PointX = -615 ; -2850 ; -2850
-            PointY = 3525 ; 3525 ; 2925
-            }
-        Line
-            {
-            Source = Pnt ;  2 ; -1 ; 0
-            Sink = Pnt ;  3 ; -1 ; 0
-            PointX = -2850 ; -2850 ; -4950
-            PointY = 2925 ; 2925 ; 2925
-            }
-        Line
-            {
-            Source = Cmp ;  6 ;  1 ; -1
-            Sink = Pnt ;  3 ; -1 ; 0
-            PointX = -4665 ; -4950 ; -4950
-            PointY = 4500 ; 4500 ; 2925
-            }
-        Line
-            {
-            Source = Pnt ;  3 ; -1 ; 0
-            Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -4950 ; -5550 ; -5550 ; -4140
-            PointY = 2925 ; 2925 ; -225 ; -225
-            }
-        Line
-            {
-            Source = Cmp ;  7 ;  1 ; -1
-            Sink = Cmp ;  6 ;  1 ; 0
-            PointX = -3390 ; -3390 ; -3750
-            PointY = 4500 ; 4500 ; 4500
+            Sink = Cmp ;  1 ;  1 ; -1
+            PointX = 1725 ; 1725 ; -6375 ; -6375 ; -3615
+            PointY = 2325 ; 2550 ; 2550 ; -300 ; -300
             }
         }
     }
