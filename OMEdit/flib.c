@@ -9,6 +9,7 @@ double WriteLastSigma(double sigma) {
 }
 
 double ReadLastSigma() {
+    printf("****ReadLastSigma\n");
     double value;
     FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "r");
     fscanf(fptr, "%lf\n", &value);
@@ -16,30 +17,32 @@ double ReadLastSigma() {
     return value;
 }
 
-double ReadLastValue(double ln){
-    printf("Read last value baby\n");
-    double n, m, i;
+double ReadLastValue(double a){
+    double m;
+    int readed;
     char c;
     double counter = 0;
     FILE *fptr;
-    fptr = fopen("/home/fran/Documents/modelica/output.txt", "r");
-    printf("ReadLastSigma %lf", ReadLastSigma());
-    i = fscanf(fptr, "%lf %c %lf\n", &n, &c, &m);
-    while(i != EOF){
-        printf("n=%f, m=%f,  c=%c, i=%f\n", n, m, c, i);
-        i = fscanf(fptr, "%lf %c %lf\n", &n, &c, &m);
-        if(n >= ln)
-            break;
-    }
+    fptr = fopen("/home/fran/Documents/modelica/input.txt", "r");
+    //printf("ReadLastSigma %lf", ReadLastSigma());
+    readed = fscanf(fptr, "%lf\n", &m);
+//    while(i != EOF){
+//        printf("n=%f, m=%f,  c=%c, i=%f\n", n, m, c, i);
+//        i = fscanf(fptr, "%lf %c %lf\n", &n, &c, &m);
+//        if(n >= ln)
+//            break;
+//    }
     fclose(fptr);
-    WriteLastSigma(n);
+//    WriteLastSigma(n);
+    printf("ReadLastValue %lf\n", m);
     return m;
 }
 
 double WriteLastValue(double value){
-    FILE *fptr = fopen("/home/fran/Documents/modelica/output.txt", "a");
-    double sigma = ReadLastSigma();
-    fprintf(fptr, "%lf, %lf\n", sigma + 1.0, value);
+    printf("WriteLastValue %lf\n", value);
+    FILE *fptr = fopen("/home/fran/Documents/modelica/output.txt", "w");
+//    double sigma = ReadLastSigma();
+    fprintf(fptr, "%lf\n", value);
     fclose(fptr);
-    return sigma + 1.0;
+    return 1.0;
 }
