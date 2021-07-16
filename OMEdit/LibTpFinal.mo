@@ -3,9 +3,13 @@ package LibTpFinal
     model ValueReader
       Real x;
       Real y;
+      Real z;
+    initial equation 
+      z = InitialEquation(1);
     equation
       x = if (time == integer(time)) then ReadValue(time) else ReadValue(-1);
       y = WriteTime(time);
+      z = 1.0;
     end ValueReader;
 
     function ReadValue
@@ -48,6 +52,15 @@ package LibTpFinal
       external y = WriteTime(x) annotation(
         Library = "/home/fran/Workspace/dynwithdis-connector/OMEdit/flib");
     end WriteTime;
+
+    function InitialEquation
+      input Real x;
+      output Real y;
+      external y = InitialEquation(x) annotation(
+        Library = "/home/fran/Workspace/dynwithdis-connector/OMEdit/flib");
+    end InitialEquation;
+
+
   end FileHandler;
 
   package Electrical

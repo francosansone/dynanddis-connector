@@ -4,28 +4,35 @@
 
 #include "flib.h"
 
-double WriteLastSigma(double sigma)
-{
-    FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "w");
-    fprintf(fptr, "%lf", sigma);
-    fclose(fptr);
-    return 0.0;
-}
+//double WriteLastSigma(double sigma)
+//{
+//    FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "w");
+//    fprintf(fptr, "%lf", sigma);
+//    fclose(fptr);
+//    return 0.0;
+//}
 
-double ReadLastSigma()
+//double ReadLastSigma()
+//{
+//    printf("****ReadLastSigma\n");
+//    double value;
+//    FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "r");
+//    fscanf(fptr, "%lf\n", &value);
+//    printf("Read last sigma %lf\n", value);
+//    return value;
+//}
+
+///This function is in charge of sanitize the files
+double InitialEquation(double v)
 {
-    printf("****ReadLastSigma\n");
-    double value;
-    FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "r");
-    fscanf(fptr, "%lf\n", &value);
-    printf("Read last sigma %lf\n", value);
-    return value;
+    printf("*************** Initial equation!!! ***************\n");
+    return 1.0;
 }
 
 double WriteTime(double time)
 {
     printf("WriteTime %lf\n", time);
-    FILE *fptr = fopen("/home/fran/Documents/modelica/time.txt", "w");
+    FILE *fptr = fopen(TIME_MODELICA, "w");
     fprintf(fptr, "%lf\n", time);
     fclose(fptr);
     return 0.0;
@@ -33,43 +40,40 @@ double WriteTime(double time)
 
 double ReadLastValue(double time)
 {
-    printf("ReadLastValue %lf\n", time);
+    if(time > 1.) {
+        printf("ReadLastValue %lf\n", time);
+    }
     double m;
     FILE *fptr;
-    fptr = fopen("/home/fran/Documents/modelica/input.txt", "r");
+    fptr = fopen(OUTPUT_POWERDEVS, "r");
     //printf("ReadLastSigma %lf", ReadLastSigma());
     fscanf(fptr, "%lf\n", &m);
-/*    if(time > 1.) {
+    fclose(fptr);
+    if(time > 1.) {
         printf("entered while zone\n");
-        FILE *f_time_ptr = fopen("/home/fran/Documents/modelica/time_powerdevs.txt", "r");
+        FILE *f_time_ptr = fopen(TIME_POWERDEVS, "r");
         double power_devs_time = 0;
-        fscanf(f_time_ptr, "%lf\n", &power_devs_time);
+        if (f_time_ptr){
+            fscanf(f_time_ptr, "%lf\n", &power_devs_time);
+        }
         while(time > power_devs_time){
             printf("waiting!!!!\n");
+            fclose(f_time_ptr);
             sleep(1);
+            f_time_ptr = fopen(TIME_POWERDEVS, "r");
             fscanf(f_time_ptr, "%lf\n", &power_devs_time);
             printf("power devs time %lf\n", power_devs_time);
         }
         fclose(f_time_ptr);
     }
-   */
-//    while(i != EOF){
-//        printf("n=%f, m=%f,  c=%c, i=%f\n", n, m, c, i);
-//        i = fscanf(fptr, "%lf %c %lf\n", &n, &c, &m);
-//        if(n >= ln)
-//            break;
-//    }
-    fclose(fptr);
-//    WriteLastSigma(n);
+    
     return m;
 }
 
 double WriteLastValue(double value)
 {
     printf("WriteLastValue %lf\n", value);
-    FILE *fptr = fopen("/home/fran/Documents/modelica/output.txt", "w");
-    //sleep(1);
-//    double sigma = ReadLastSigma();
+    FILE *fptr = fopen(OUTPUT_MODELICA, "w");
     fprintf(fptr, "%lf\n", value);
     fclose(fptr);
     return 1.0;
