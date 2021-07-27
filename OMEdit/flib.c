@@ -40,16 +40,18 @@ double WriteTime(double time)
 
 double ReadLastValue(double time)
 {
-    if(time > 1.) {
+    if(time >= 1.) {
         printf("ReadLastValue %lf\n", time);
     }
-    double m;
+    double m = 0.0;
     FILE *fptr;
     fptr = fopen(OUTPUT_POWERDEVS, "r");
-    //printf("ReadLastSigma %lf", ReadLastSigma());
-    fscanf(fptr, "%lf\n", &m);
-    fclose(fptr);
-    if(time > 1.) {
+    if(fptr){
+        //printf("ReadLastSigma %lf", ReadLastSigma());
+        fscanf(fptr, "%lf\n", &m);
+        fclose(fptr);
+    }
+    if(time >= 1.) {
         printf("entered while zone\n");
         FILE *f_time_ptr = fopen(TIME_POWERDEVS, "r");
         double power_devs_time = 0;

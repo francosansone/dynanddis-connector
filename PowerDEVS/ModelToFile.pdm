@@ -153,6 +153,12 @@ Coupled
             ConectedExtrems = Org ; Org ; Org
             Position = 1725 ; 2325
             }
+        Point
+            {
+            ConectedLines = 6 ; 7 ; 8
+            ConectedExtrems = Org ; Org ; Org
+            Position = -1500 ; 2550
+            }
         Line
             {
             Source = Cmp ;  4 ;  1 ; 0
@@ -191,9 +197,23 @@ Coupled
         Line
             {
             Source = Pnt ;  1 ; -1 ; 0
+            Sink = Pnt ;  2 ; -1 ; 0
+            PointX = 1725 ; 1725 ; -1500
+            PointY = 2325 ; 2550 ; 2550
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  1 ; -1
+            Sink = Pnt ;  2 ; -1 ; 0
+            PointX = -540 ; -1500 ; -1500
+            PointY = 3450 ; 3450 ; 2550
+            }
+        Line
+            {
+            Source = Pnt ;  2 ; -1 ; 0
             Sink = Cmp ;  1 ;  1 ; -1
-            PointX = 1725 ; 1725 ; -6375 ; -6375 ; -3615
-            PointY = 2325 ; 2550 ; 2550 ; -300 ; -300
+            PointX = -1500 ; -6375 ; -6375 ; -3615
+            PointY = 2550 ; 2550 ; -300 ; -300
             }
         }
     }
