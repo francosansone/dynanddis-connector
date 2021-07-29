@@ -124,7 +124,7 @@ Coupled
                 }
             Parameters
                 {
-                input = Str;  ; 
+                expected = Val; 20 ; 
                 }
             }
         Atomic
@@ -177,7 +177,7 @@ Coupled
             {
             Source = Cmp ;  5 ;  1 ; 0
             Sink = Cmp ;  6 ;  1 ; -1
-            PointX = -1350 ; 210 ; 210
+            PointX = -1350 ; -1350 ; 210
             PointY = -300 ; -300 ; -300
             }
         Line

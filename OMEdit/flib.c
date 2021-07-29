@@ -4,28 +4,21 @@
 
 #include "flib.h"
 
-//double WriteLastSigma(double sigma)
-//{
-//    FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "w");
-//    fprintf(fptr, "%lf", sigma);
-//    fclose(fptr);
-//    return 0.0;
-//}
-
-//double ReadLastSigma()
-//{
-//    printf("****ReadLastSigma\n");
-//    double value;
-//    FILE *fptr = fopen("/home/fran/Documents/modelica/lastsigma.txt", "r");
-//    fscanf(fptr, "%lf\n", &value);
-//    printf("Read last sigma %lf\n", value);
-//    return value;
-//}
-
 ///This function is in charge of sanitize the files
 double InitialEquation(double v)
 {
     printf("*************** Initial equation!!! ***************\n");
+    
+    FILE *fptr_time = fopen(TIME_MODELICA, "w");
+    fprintf(fptr_time, "%lf\n", 0.0);
+    fclose(fptr_time);
+    
+    FILE *fptr_output = fopen(OUTPUT_MODELICA, "w");
+    fprintf(fptr_output, "%lf\n", 0.0);
+    fclose(fptr_output);
+    
+    //sleep to wait PowerDEVS starts...
+    sleep(10);
     return 1.0;
 }
 
@@ -40,9 +33,6 @@ double WriteTime(double time)
 
 double ReadLastValue(double time)
 {
-    if(time >= 1.) {
-        printf("ReadLastValue %lf\n", time);
-    }
     double m = 0.0;
     FILE *fptr;
     fptr = fopen(OUTPUT_POWERDEVS, "r");
@@ -51,7 +41,7 @@ double ReadLastValue(double time)
         fscanf(fptr, "%lf\n", &m);
         fclose(fptr);
     }
-    if(time >= 1.) {
+//    if(time >= 1.) {
         printf("entered while zone\n");
         FILE *f_time_ptr = fopen(TIME_POWERDEVS, "r");
         double power_devs_time = 0;
@@ -67,7 +57,7 @@ double ReadLastValue(double time)
             printf("power devs time %lf\n", power_devs_time);
         }
         fclose(f_time_ptr);
-    }
+  //  }
     
     return m;
 }

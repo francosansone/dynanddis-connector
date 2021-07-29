@@ -10,11 +10,22 @@ va_start(parameters,t);
 
 printLog("\initialized...\n");
 
+expected_value = va_arg(parameters,double);
+
 y = 0.0;
-value = 0.0;
+value_read = 0.0;
+last_value = 0.0;
 sigma = INF;
-//FInput = PDFileOpen("/tmp/test.txt", 'r');
-//FTimeControl = PDFileOpen("/tmp/test.txt", 'r');
+lastTimeWrite = 0;
+last_value = 0.0;
+FInput = PDFileOpen(TIME_POWERDEVS, 'w');
+FTimeControl = PDFileOpen(OUTPUT_POWERDEVS, 'w');
+PDFileWrite(FInput, "0", 1);
+PDFileWrite(FTimeControl, "0", 1);
+PDFileClose(FInput);
+PDFileClose(FTimeControl);
+sleep(10);
+
 }
 double fromfile::ta(double t) {
 //This function returns a double.
@@ -33,12 +44,12 @@ void fromfile::dext(Event x, double t) {
 char timeBuf[1024];
 int currentTime = lastTimeRead;
 while (currentTime <= lastTimeRead) {
-  FTimeControl = PDFileOpen("/tmp/time.txt", 'r');
-	int tt = PDFileRead(FTimeControl, timeBuf , 255);
+  FModelicaTime = PDFileOpen(TIME_MODELICA, 'r');
+	int tt = PDFileRead(FModelicaTime, timeBuf , 255);
 	printLog("Size read %d\n", tt);
 	currentTime = atoi(timeBuf);
 	printLog("CurrentTime %d lastTime %d\n", currentTime, lastTimeRead);
-	PDFileClose(FTimeControl);
+	PDFileClose(FModelicaTime);
 	sleep(1);
 }
 
@@ -46,13 +57,13 @@ printLog("advancing..\n");
 lastTimeRead = currentTime;
 char buf[1024];
 printLog("PDFileOpen value %ld..\n", FInput);
-FInput = PDFileOpen("/tmp/test.txt", 'r');
+FInput = PDFileOpen(OUTPUT_MODELICA, 'r');
 int r = PDFileRead(FInput, buf , 255);
 PDFileClose(FInput);
 printLog("Size read %d\n", r);
-value = strtod(buf, NULL);
-counter += 1.0;
-printLog("Value read %f\n", value);
+value_read = strtod(buf, NULL);
+printLog("Value read %f\n", value_read);
+
 sigma = 0;
 
 }
@@ -63,7 +74,26 @@ Event fromfile::lambda(double t) {
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
 
-y = value + counter;
+FTimeControl = PDFileOpen(TIME_POWERDEVS, 'w');
+char timeToWrite[5] = "";
+sprintf(timeToWrite, "%d", lastTimeRead);
+PDFileWrite(FTimeControl, timeToWrite, 5);
+PDFileClose(FTimeControl);
+printLog("Time wrote\n");
+
+double error = expected_value - value_read;
+last_value += error *  3;
+
+y = last_value;
+
+FOutput = PDFileOpen(OUTPUT_POWERDEVS, 'w');
+char valueToWrite[10] = "";
+sprintf(valueToWrite, "%lf", y);
+printLog("valueToWrite %s\n", valueToWrite);
+PDFileWrite(FOutput, valueToWrite, 10);
+PDFileClose(FOutput);
+
+
 return Event(&y, 0);
 }
 void fromfile::exit() {
