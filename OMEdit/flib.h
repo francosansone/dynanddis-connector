@@ -1,7 +1,7 @@
-#define TIME_POWERDEVS "/home/fran/Documents/modelica/time_powerdevs.txt"
-#define TIME_MODELICA "/home/fran/Documents/modelica/time_modelica.txt"
-#define OUTPUT_POWERDEVS "/home/fran/Documents/modelica/output_powerdevs.txt"
-#define OUTPUT_MODELICA "/home/fran/Documents/modelica/output_modelica.txt"
+#define TIME_POWERDEVS "/tmp/time_powerdevs.txt"
+#define TIME_MODELICA "/tmp/time_modelica.txt"
+#define OUTPUT_POWERDEVS "/tmp/output_powerdevs.txt"
+#define OUTPUT_MODELICA "/tmp/output_modelica.txt"
 
 double InitialEquation(double);
 double ReadLastValue(double);

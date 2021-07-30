@@ -124,7 +124,10 @@ Coupled
                 }
             Parameters
                 {
-                expected = Val; 20 ; 
+                initial = Val; 1 ; Valor inicial que seteará PowerDEVS al iniciar
+                expected = Val; 20 ; Valor de entrada esperado (leído desde OMEdit)
+                interval = Val; 5 ; Cada "intervalo" unidades de tiempo, actualizará un nuevo valor de salida.
+                lambda = Val; 0.2 ; Constante encarga de controlar la velocidad del descenso del error.
                 }
             }
         Atomic

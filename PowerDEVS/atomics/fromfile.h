@@ -17,12 +17,12 @@ class fromfile: public Simulator {
 
 //states
 double sigma;
-long int FInput;
-long int FTimeControl;
-long int FModelicaTime;
-long int FOutput;
-int lastTimeRead;
-int lastTimeWrite;
+long int f_input;
+long int f_time_control;
+long int f_modelica_time;
+long int f_output;
+double last_time_read;
+double last_time_write;
 double value_read;
 double last_value;
 
@@ -30,13 +30,16 @@ double last_value;
 double y;
 
 // parameters
-double expected_value;
+double initial;
+double expected;
+double interval;
+double lambda_value;
 
 #define INF 1e20
-#define TIME_POWERDEVS "/home/fran/Documents/modelica/time_powerdevs.txt"
-#define TIME_MODELICA "/home/fran/Documents/modelica/time_modelica.txt"
-#define OUTPUT_POWERDEVS "/home/fran/Documents/modelica/output_powerdevs.txt"
-#define OUTPUT_MODELICA "/home/fran/Documents/modelica/output_modelica.txt"
+#define TIME_POWERDEVS "/tmp/time_powerdevs.txt"
+#define TIME_MODELICA "/tmp/time_modelica.txt"
+#define OUTPUT_POWERDEVS "/tmp/output_powerdevs.txt"
+#define OUTPUT_MODELICA "/tmp/output_modelica.txt"
 
 public:
 	fromfile(const char *n): Simulator(n) {};

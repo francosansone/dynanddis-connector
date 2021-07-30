@@ -19,6 +19,14 @@ double InitialEquation(double v)
     
     //sleep to wait PowerDEVS starts...
     sleep(10);
+    
+    FILE *fptr_input = fopen(OUTPUT_POWERDEVS, "r");
+    double initial_value = 0.0;
+    fscanf(fptr_input, "%lf\n", &initial_value);
+    fclose(fptr_input);
+    
+    printf("initial value read %lf\n", initial_value);
+    
     return 1.0;
 }
 
