@@ -17,7 +17,7 @@ package LibTpFinal
       output Real y;
     
       external y = ReadLastValue(x) annotation(
-        Library = "/home/fran/Workspace/dynwithdis-connector/OMEdit/flib");
+        Library = "/opt/modelica/flib");
     end ReadValue;
 
     function WriteValue
@@ -25,7 +25,7 @@ package LibTpFinal
       output Real y;
     
       external y = WriteLastValue(x) annotation(
-        Library = "/home/fran/Workspace/dynwithdis-connector/OMEdit/flib");
+        Library = "/opt/modelica/flib");
     end WriteValue;
 
     model ValueWriter
@@ -35,31 +35,19 @@ package LibTpFinal
       z = WriteValue(x);
     end ValueWriter;
 
-    /*
-      model NewSample
-        Electrical.RL rl;
-        ValueWriter valueWriter;
-        ValueReader valueReader;
-      equation
-        connect(rl.rlopen.la.v, valueWriter.x);
-        connect(rl.rlopen.va.v, valueReader.x);
-      end NewSample;
-    */
-
     function WriteTime
       input Real x;
       output Real y;
       external y = WriteTime(x) annotation(
-        Library = "/home/fran/Workspace/dynwithdis-connector/OMEdit/flib");
+        Library = "/opt/modelica/flib");
     end WriteTime;
 
     function InitialEquation
       input Real x;
       output Real y;
       external y = InitialEquation(x) annotation(
-        Library = "/home/fran/Workspace/dynwithdis-connector/OMEdit/flib");
+        Library = "/opt/modelica/flib");
     end InitialEquation;
-
 
   end FileHandler;
 

@@ -30,6 +30,7 @@ double InitialEquation(double v)
     return 1.0;
 }
 
+/// Writes the time of modelica simulation
 double WriteTime(double time)
 {
     printf("WriteTime %lf\n", time);
@@ -39,37 +40,35 @@ double WriteTime(double time)
     return 0.0;
 }
 
+/// Reads the last time value of the PowerDEVS simulation and
+/// waits if the read value is lower.
 double ReadLastValue(double time)
 {
     double m = 0.0;
     FILE *fptr;
     fptr = fopen(OUTPUT_POWERDEVS, "r");
     if(fptr){
-        //printf("ReadLastSigma %lf", ReadLastSigma());
         fscanf(fptr, "%lf\n", &m);
         fclose(fptr);
     }
-//    if(time >= 1.) {
-        printf("entered while zone\n");
-        FILE *f_time_ptr = fopen(TIME_POWERDEVS, "r");
-        double power_devs_time = 0;
-        if (f_time_ptr){
-            fscanf(f_time_ptr, "%lf\n", &power_devs_time);
-        }
-        while(time > power_devs_time){
-            printf("waiting!!!!\n");
-            fclose(f_time_ptr);
-            sleep(1);
-            f_time_ptr = fopen(TIME_POWERDEVS, "r");
-            fscanf(f_time_ptr, "%lf\n", &power_devs_time);
-            printf("power devs time %lf\n", power_devs_time);
-        }
+
+    FILE *f_time_ptr = fopen(TIME_POWERDEVS, "r");
+    double power_devs_time = 0;
+    if (f_time_ptr){
+        fscanf(f_time_ptr, "%lf\n", &power_devs_time);
+    }
+    while(time > power_devs_time){
         fclose(f_time_ptr);
-  //  }
-    
+        sleep(1);
+        f_time_ptr = fopen(TIME_POWERDEVS, "r");
+        fscanf(f_time_ptr, "%lf\n", &power_devs_time);
+        printf("power devs time %lf\n", power_devs_time);
+    }
+    fclose(f_time_ptr);
     return m;
 }
 
+/// Write the last value to give information to PowerDEVS simulation.
 double WriteLastValue(double value)
 {
     printf("WriteLastValue %lf\n", value);

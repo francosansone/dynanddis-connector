@@ -61,7 +61,7 @@ Coupled
                 }
             Parameters
                 {
-                File = Str; /home/fran/Desktop/output.txt ; file name
+                File = Str; /tmp/output.txt ; file name
                 }
             }
         Atomic
@@ -110,7 +110,7 @@ Coupled
             }
         Atomic
             {
-            Name = Atomic1
+            Name = Modificador
             Ports = 1 ; 1
             Path = tpfinal/fromfile.h
             Description = Atomic DEVS model
