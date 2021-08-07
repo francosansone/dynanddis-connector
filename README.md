@@ -29,7 +29,7 @@ Para instalar las dependencias necesarias solo debe correrse el script _compile.
 
 ## Ejecución
 
-Para la comunicación, ambos sistemas escribirán archivos y se esperarán mutuamente. Para mayor claridad explicaré con un ejemplo.
+Para la comunicación, ambos sistemas escribirán archivos y se esperarán mutuamente. Para mayor claridad explicaremos con un ejemplo.
 
 Abrimos los archivos _OMEdit/LibTpFinal.mo_ en OMEdit y _PowerDEVS/ModelToFile.pdm_ en PowerDEVS.
 
